@@ -12,8 +12,6 @@ export default class VoteRepository extends Repository<Vote> {
     await this.save({
       ...vote,
       Post: {
-        openExtra: undefined,
-        closeExtra: undefined,
         id: postId,
       },
       user: { id: userId },
