@@ -11,7 +11,7 @@ import { getMiddle, getNext } from './lexorank';
 const debug = process.env.NODE_ENV === 'development';
 
 function sendFactory(socket: SocketIOClient.Socket, sessionId: string) {
-  return function(action: string, payload?: any) {
+  return function (action: string, payload?: any) {
     if (socket) {
       socket.emit(action, {
         sessionId: sessionId,
@@ -163,12 +163,15 @@ const useGame = (sessionId: string) => {
       }
     );
 
-    newSocket.on(Actions.RECEIVE_EDIT_POST, (post: { post: Post }) => {
-      if (debug) {
-        console.log('Receive edit post: ', post.post);
+    newSocket.on(
+      Actions.RECEIVE_EDIT_POST,
+      (Post: { openExtra: undefined; closeExtra: undefined; post: Post }) => {
+        if (debug) {
+          console.log('Receive edit post: ', post.post);
+        }
+        updatePost(post.post);
       }
-      updatePost(post.post);
-    });
+    );
 
     newSocket.on(Actions.RECEIVE_EDIT_POST_GROUP, (group: PostGroup) => {
       if (debug) {
@@ -373,7 +376,7 @@ const useGame = (sessionId: string) => {
         const type: VoteType = like ? 'like' : 'dislike';
         const existingVote = find(
           post.votes,
-          v => v.type === type && v.user.id === user!.id
+          (v) => v.type === type && v.user.id === user!.id
         );
         if (existingVote && !allowMultipleVotes) {
           return;

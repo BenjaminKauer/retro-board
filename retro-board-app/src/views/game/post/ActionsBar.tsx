@@ -5,6 +5,7 @@ import { MoreHoriz, Close } from '@material-ui/icons';
 import useOpenClose from '../../../hooks/useOpenClose';
 import ActionButton from './ActionButton';
 import ReactCardFlip from 'react-card-flip';
+import useTranslations from '../../../translations';
 
 interface ActionsBar {
   extraActions: React.ReactNode;
@@ -17,6 +18,8 @@ const ActionsBar: React.FC<ActionsBar> = ({
   color,
 }) => {
   const [extraMenuOpen, openExtraMenu, closeExtraMenu] = useOpenClose(false);
+  const { Post: translations } = useTranslations();
+
   const darkColor = darken(color, 0.05);
 
   return (
@@ -29,7 +32,8 @@ const ActionsBar: React.FC<ActionsBar> = ({
             <ActionButton
               icon={<MoreHoriz />}
               onClick={openExtraMenu}
-              ariaLabel="More"
+              tooltip={translations.openExtra}
+              ariaLabel={translations.openExtra!}
             />
           </MoreButtonContainer>
         </ButtonsContainer>
@@ -39,7 +43,8 @@ const ActionsBar: React.FC<ActionsBar> = ({
             <ActionButton
               icon={<Close />}
               onClick={closeExtraMenu}
-              ariaLabel="Close"
+              tooltip={translations.closeExtra}
+              ariaLabel={translations.closeExtra!}
             />
           </MoreButtonContainer>
         </ExtraButtonsContainer>

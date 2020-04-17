@@ -176,6 +176,7 @@ const PostItem = ({
                   {canDelete && (
                     <ActionButton
                       ariaLabel={postTranslations.deleteButton!}
+                      tooltip={postTranslations.deleteButton!}
                       icon={
                         <DeleteForeverOutlined
                           style={{ color: Palette.negative }}
@@ -187,6 +188,7 @@ const PostItem = ({
                   {canCreateAction && (
                     <ActionButton
                       ariaLabel={postTranslations.setActionButton!}
+                      tooltip={postTranslations.setActionButton!}
                       icon={
                         post.action ? (
                           <Feedback className={classes.actionIcon} />
@@ -200,6 +202,7 @@ const PostItem = ({
                   {canEdit && config.hasGiphy && canUseGiphy && (
                     <ActionButton
                       ariaLabel={postTranslations.setGiphyButton!}
+                      tooltip={postTranslations.setGiphyButton!}
                       icon={<EmojiEmotions className={classes.ghipyIcon} />}
                       innerRef={postElement}
                       onClick={handleShowGiphy}
@@ -228,7 +231,8 @@ const PostItem = ({
               />
               {giphyImageUrl && (
                 <ActionButton
-                  ariaLabel="Toggle Giphy Image"
+                  ariaLabel={postTranslations.toggleGiphyButton!}
+                  tooltip={postTranslations.toggleGiphyButton}
                   icon={
                     <InsertPhotoTwoTone
                       style={{
