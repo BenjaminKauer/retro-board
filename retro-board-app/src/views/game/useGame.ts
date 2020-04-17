@@ -163,15 +163,12 @@ const useGame = (sessionId: string) => {
       }
     );
 
-    newSocket.on(
-      Actions.RECEIVE_EDIT_POST,
-      (Post: { openExtra: undefined; closeExtra: undefined; post: Post }) => {
-        if (debug) {
-          console.log('Receive edit post: ', post.post);
-        }
-        updatePost(post.post);
+    newSocket.on(Actions.RECEIVE_EDIT_POST, (post: { post: Post }) => {
+      if (debug) {
+        console.log('Receive edit post: ', post.post);
       }
-    );
+      updatePost(post.post);
+    });
 
     newSocket.on(Actions.RECEIVE_EDIT_POST_GROUP, (group: PostGroup) => {
       if (debug) {
